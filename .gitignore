@@ -49,3 +49,7 @@ sentry.properties
 
 # Avya release signing key — never commit
 /avya.jks
+
+# Release signing material — never commit
+/avya-signing.properties
+/*.jks

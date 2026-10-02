@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Adaptive-icon background: a soft pastel wash matching the app's seed colour (#F2B8D4).
-  Flat rather than gradient-heavy so the spider reads clearly at launcher size, and so the
+  Flat rather than gradient-heavy so the mark reads clearly at launcher size, and so the
   themed-icon and monochrome variants stay legible.
 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"

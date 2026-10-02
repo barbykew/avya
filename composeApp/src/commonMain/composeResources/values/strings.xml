@@ -744,7 +744,7 @@
     <string name="avya_quick_colour">Colour</string>
     <string name="avya_quick_colour_sub">Pick your pastel</string>
     <string name="avya_quick_presence">Show on Discord</string>
-    <string name="avya_quick_presence_sub">The spider shows what you're playing</string>
+    <string name="avya_quick_presence_sub">Show what you're playing on Discord</string>
     <string name="avya_quick_presence_connect">Connect Discord to show what you're playing</string>
     <string name="avya_welcome_title">Welcome, Avya</string>
     <string name="avya_welcome_subtitle">A few quick sign-ins and everything works. Skip anything you don't want — it's all in Settings later.</string>
@@ -753,7 +753,7 @@
     <string name="avya_welcome_spotify">Connect Spotify</string>
     <string name="avya_welcome_spotify_why">For importing your playlists and synced lyrics</string>
     <string name="avya_welcome_discord">Connect Discord</string>
-    <string name="avya_welcome_discord_why">Shows what you're listening to, with the spider</string>
+    <string name="avya_welcome_discord_why">Shows what you're listening to on your profile</string>
     <string name="avya_welcome_import">Bring over a Spotify playlist</string>
     <string name="avya_welcome_import_why">Paste a playlist link and it's rebuilt here</string>
     <string name="avya_welcome_import_locked">Connect Spotify first</string>

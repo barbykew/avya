@@ -121,8 +121,8 @@ fun AvyaWelcome(
                 modifier = Modifier.verticalScroll(rememberScrollState()).padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                // The app's own spider icon rather than an emoji: Skia on Windows has no colour
-                // emoji font to fall back to, so a spider emoji would draw as an empty box there.
+                // The app's own icon rather than an emoji: Skia on Windows has no colour
+                // emoji font to fall back to, so an emoji emoji would draw as an empty box there.
                 Image(
                     painter = painterResource(Res.drawable.circle_app_icon),
                     contentDescription = null,

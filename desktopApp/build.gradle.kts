@@ -8,7 +8,7 @@ import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
-// desktopApp — JVM application module for SimpMusic Desktop.
+// desktopApp — JVM application module for Avya Desktop.
 //
 // Per JetBrains 2026 KMP guidance (AGP 9 + new default structure), the
 // platform-app entry points live in dedicated modules separate from the
@@ -117,7 +117,7 @@ dependencies {
     windowsAmd64(libs.compose.windows.x64)
 }
 
-// Append SimpMusic-specific keys to Conveyor's generated config file and
+// Append Avya-specific keys to Conveyor's generated config file and
 // — crucially — replace the auto-detected `app.inputs` classpath with
 // ProGuard's shrunk jar directory so the packaged AppImage carries
 // obfuscated + size-reduced bytecode instead of raw Gradle output.
@@ -128,9 +128,9 @@ tasks.named<hydraulic.conveyor.gradle.WriteConveyorConfigTask>("writeConveyorCon
     doLast {
         destination.get().asFile.appendText(
             """
-            |app.fsname = simpmusic
-            |app.display-name = Jenny Music
-            |app.rdns-name = com.maxrave.simpmusic
+            |app.fsname = avya
+            |app.display-name = Avya
+            |app.rdns-name = com.avya.app
             |
             |// Override the Gradle-detected classpath with the ProGuard'd
             |// jar directory. Conveyor expands a directory entry to every
@@ -147,7 +147,7 @@ tasks.named<hydraulic.conveyor.gradle.WriteConveyorConfigTask>("writeConveyorCon
 
 compose.desktop {
     application {
-        mainClass = "com.maxrave.simpmusic.MainKt"
+        mainClass = "com.avya.app.MainKt"
         jvmArgs += "--add-opens=java.base/java.nio=ALL-UNNAMED"
 
         nativeDistributions {
@@ -167,7 +167,7 @@ compose.desktop {
             }
             targetFormats(*listTarget.toTypedArray())
             modules("jdk.unsupported")
-            packageName = "Jenny Music"
+            packageName = "Avya"
             macOS {
                 val formatedDate =
                     Instant.now().let {
@@ -195,10 +195,10 @@ compose.desktop {
                             <key>CFBundleTypeRole</key>
                             <string>Viewer</string>
                             <key>CFBundleURLName</key>
-                            <string>com.maxrave.simpmusic.deeplink</string>
+                            <string>com.avya.app.deeplink</string>
                             <key>CFBundleURLSchemes</key>
                             <array>
-                                <string>simpmusic</string>
+                                <string>avya</string>
                             </array>
                         </dict>
                     </array>
@@ -213,7 +213,7 @@ compose.desktop {
                     libs.versions.version.name
                         .get()
                         .removeSuffix("-hf")
-                iconFile.set(rootDir.resolve("composeApp/icon/jenny_app_icon.ico"))
+                iconFile.set(rootDir.resolve("composeApp/icon/avya_app_icon.ico"))
             }
             linux {
                 includeAllModules = true
@@ -332,7 +332,7 @@ tasks.register("packageConveyorAppImage") {
     )
 
     doLast {
-        val appName = "SimpMusic"
+        val appName = "Avya"
         val conveyorOutput = rootDir.resolve("output")
         if (!conveyorOutput.exists()) {
             throw GradleException(
@@ -377,7 +377,7 @@ tasks.register("packageConveyorAppImage") {
 
         // Ensure top-level PNG icon expected by appimagetool exists.
         val iconSrc = rootDir.resolve("composeApp/icon/circle_app_icon.png")
-        val iconDst = appDir.resolve("simpmusic.png")
+        val iconDst = appDir.resolve("avya.png")
         if (!iconDst.exists() && iconSrc.exists()) {
             FileUtils.copyFile(iconSrc, iconDst)
         }
@@ -385,7 +385,7 @@ tasks.register("packageConveyorAppImage") {
         val versionName =
             libs.versions.version.name
                 .get()
-        val desktopFile = appDir.resolve("simpmusic.desktop")
+        val desktopFile = appDir.resolve("avya.desktop")
         // This file, not Conveyor's, is what actually reaches the user: AppRun installs it into
         // ~/.local/share/applications and runs update-desktop-database. So every scheme listed in
         // `app.url-schemes` in conveyor.conf has to be repeated here as an x-scheme-handler MIME
@@ -396,14 +396,14 @@ tasks.register("packageConveyorAppImage") {
             """[Desktop Entry]
             |Type=Application
             |Version=1.0
-            |Name=SimpMusic
-            |Comment=SimpMusic v$versionName - FOSS YouTube Music Client
-            |Exec=bin/simpmusic %u
-            |Icon=simpmusic
+            |Name=Avya
+            |Comment=Avya v$versionName - FOSS YouTube Music Client
+            |Exec=bin/avya %u
+            |Icon=avya
             |Terminal=false
             |Categories=Audio;AudioVideo;
-            |StartupWMClass=SimpMusic
-            |MimeType=x-scheme-handler/simpmusic;x-scheme-handler/wordbyword;
+            |StartupWMClass=Avya
+            |MimeType=x-scheme-handler/avya;x-scheme-handler/wordbyword;
             |
             """.trimMargin(),
         )
@@ -417,9 +417,9 @@ tasks.register("packageConveyorAppImage") {
             |
             |# Install icon into XDG dirs so GNOME/KDE pick it up the first time.
             |ICON_DIR="${'$'}HOME/.local/share/icons/hicolor/256x256/apps"
-            |if [ ! -f "${'$'}ICON_DIR/simpmusic.png" ] || [ "${'$'}HERE/simpmusic.png" -nt "${'$'}ICON_DIR/simpmusic.png" ]; then
+            |if [ ! -f "${'$'}ICON_DIR/avya.png" ] || [ "${'$'}HERE/avya.png" -nt "${'$'}ICON_DIR/avya.png" ]; then
             |    mkdir -p "${'$'}ICON_DIR"
-            |    cp "${'$'}HERE/simpmusic.png" "${'$'}ICON_DIR/simpmusic.png"
+            |    cp "${'$'}HERE/avya.png" "${'$'}ICON_DIR/avya.png"
             |    gtk-update-icon-cache -f -t "${'$'}HOME/.local/share/icons/hicolor" 2>/dev/null || true
             |fi
             |
@@ -427,7 +427,7 @@ tasks.register("packageConveyorAppImage") {
             |DESKTOP_DIR="${'$'}HOME/.local/share/applications"
             |mkdir -p "${'$'}DESKTOP_DIR"
             |APPIMAGE_PATH="${'$'}{APPIMAGE:-${'$'}SELF}"
-            |sed "s|Exec=bin/simpmusic|Exec=${'$'}APPIMAGE_PATH|" "${'$'}HERE/simpmusic.desktop" > "${'$'}DESKTOP_DIR/com-maxrave-simpmusic-MainKt.desktop"
+            |sed "s|Exec=bin/avya|Exec=${'$'}APPIMAGE_PATH|" "${'$'}HERE/avya.desktop" > "${'$'}DESKTOP_DIR/com-maxrave-avya-MainKt.desktop"
             |update-desktop-database "${'$'}DESKTOP_DIR" 2>/dev/null || true
             |
             |# Cap glibc's per-thread malloc arenas.
@@ -444,14 +444,14 @@ tasks.register("packageConveyorAppImage") {
             |export MALLOC_ARENA_MAX=2
             |
             |cd "${'$'}HERE"
-            |exec bin/simpmusic "${'$'}@"
+            |exec bin/avya "${'$'}@"
             |
             """.trimMargin(),
         )
         appRun.setExecutable(true, false)
 
-        // Conveyor's launcher lives at output/bin/simpmusic (lowercase).
-        val appExecutable = appDir.resolve("bin/simpmusic")
+        // Conveyor's launcher lives at output/bin/avya (lowercase).
+        val appExecutable = appDir.resolve("bin/avya")
         if (appExecutable.exists() && !appExecutable.canExecute()) {
             appExecutable.setExecutable(true)
         }
@@ -479,7 +479,7 @@ tasks.register("packageConveyorAppImage") {
 // Single command for users: `./gradlew :desktopApp:buildLinuxAppImage --no-configuration-cache`
 tasks.register("buildLinuxAppImage") {
     group = "distribution"
-    description = "Full SimpMusic Desktop Linux AppImage build pipeline (mpvSetupAll → conveyor → AppImage)."
+    description = "Full Avya Desktop Linux AppImage build pipeline (mpvSetupAll → conveyor → AppImage)."
     dependsOn(conveyorMakeLinuxApp)
     finalizedBy("packageConveyorAppImage")
 }
@@ -523,13 +523,13 @@ val conveyorMakeMacZipAarch64 =
 
 tasks.register("buildMacZipAmd64") {
     group = "distribution"
-    description = "Full SimpMusic Desktop macOS Intel .zip pipeline (mpvSetupAll → conveyor)."
+    description = "Full Avya Desktop macOS Intel .zip pipeline (mpvSetupAll → conveyor)."
     dependsOn(conveyorMakeMacZipAmd64)
 }
 
 tasks.register("buildMacZipAarch64") {
     group = "distribution"
-    description = "Full SimpMusic Desktop macOS Apple Silicon .zip pipeline (mpvSetupAll → conveyor)."
+    description = "Full Avya Desktop macOS Apple Silicon .zip pipeline (mpvSetupAll → conveyor)."
     dependsOn(conveyorMakeMacZipAarch64)
 }
 
@@ -555,7 +555,7 @@ val conveyorMakeWindowsMsix =
 
 tasks.register("buildWindowsMsix") {
     group = "distribution"
-    description = "Full SimpMusic Desktop Windows .msix pipeline (mpvSetupAll → conveyor)."
+    description = "Full Avya Desktop Windows .msix pipeline (mpvSetupAll → conveyor)."
     dependsOn(conveyorMakeWindowsMsix)
 }
 

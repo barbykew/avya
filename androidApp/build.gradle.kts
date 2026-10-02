@@ -16,11 +16,11 @@ plugins {
 android {
     val abis = arrayOf("armeabi-v7a", "arm64-v8a", "x86_64")
 
-    namespace = "com.maxrave.simpmusic"
+    namespace = "com.avya.app"
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "com.jenny.music"
+        applicationId = "com.avya.app"
         minSdk = 26
         targetSdk = 36
         versionCode =
@@ -85,27 +85,27 @@ android {
     // file, so the key and its passwords never reach the public repository. A missing keystore
     // leaves signingConfig null, which still builds — it just produces an unsigned APK, the same
     // as upstream — instead of failing the whole configuration phase for anyone who clones this.
-    val jennyKeystore = rootProject.file("jenny-music.jks")
-    val jennyProps =
+    val avyaKeystore = rootProject.file("avya.jks")
+    val avyaProps =
         Properties().apply {
             val f = rootProject.file("local.properties")
             if (f.exists()) f.inputStream().use { load(it) }
         }
 
     signingConfigs {
-        if (jennyKeystore.exists() && jennyProps.getProperty("JENNY_KEY_ALIAS") != null) {
-            create("jenny") {
-                storeFile = jennyKeystore
-                storePassword = jennyProps.getProperty("JENNY_KEYSTORE_PASSWORD")
-                keyAlias = jennyProps.getProperty("JENNY_KEY_ALIAS")
-                keyPassword = jennyProps.getProperty("JENNY_KEY_PASSWORD")
+        if (avyaKeystore.exists() && avyaProps.getProperty("AVYA_KEY_ALIAS") != null) {
+            create("avya") {
+                storeFile = avyaKeystore
+                storePassword = avyaProps.getProperty("AVYA_KEYSTORE_PASSWORD")
+                keyAlias = avyaProps.getProperty("AVYA_KEY_ALIAS")
+                keyPassword = avyaProps.getProperty("AVYA_KEY_PASSWORD")
             }
         }
     }
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.findByName("jenny")
+            signingConfig = signingConfigs.findByName("avya")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
@@ -209,7 +209,7 @@ dependencies {
 }
 
 sentry {
-    org.set("simpmusic")
+    org.set("avya")
     projectName.set("android")
     ignoredFlavors.set(setOf("foss"))
     ignoredBuildTypes.set(setOf("debug"))
@@ -228,7 +228,7 @@ sentry {
         authToken.set(token ?: "")
         includeProguardMapping.set(true)
         // Upload only when a token is actually present. This fork has no Sentry org of its own,
-        // and `org` above points at SimpMusic's — so uploading here would be pushing mappings to
+        // and `org` above points at Avya's — so uploading here would be pushing mappings to
         // someone else's account. With no token the task does not skip, it FAILS, and it runs
         // after packaging: the release APKs are already on disk by then, so the build reports
         // failure while having produced everything. Keeping the mapping local costs nothing, it

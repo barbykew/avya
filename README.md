@@ -1,12 +1,12 @@
 <div align="center">
 
-<img src="composeApp/icon/jenny_app_icon.png" width="140" alt="Jenny Music" />
+<img src="composeApp/icon/avya_app_icon.png" width="140" alt="Avya" />
 
-# Jenny Music
+# Avya
 
 *a pastel music player for phone and PC*
 
-**[⬇ Download for phone & PC](https://github.com/barbykew/jenny-music/releases/latest)**
+**[⬇ Download for phone & PC](https://github.com/barbykew/avya/releases/latest)**
 
 </div>
 
@@ -14,9 +14,9 @@
 
 ## What it is
 
-Jenny Music is a fork of [SimpMusic](https://github.com/maxrave-dev/SimpMusic) that streams from
-YouTube Music. It adds a pastel theme with ten colours to choose from, Discord Rich Presence, and
-an in-app Spotify playlist importer, and it runs on both Android and Windows.
+Avya streams from YouTube Music with no ads and no tracking. It has a pastel theme with ten
+colours, Discord Rich Presence, and an in-app Spotify playlist importer, and it runs on both
+Android and Windows.
 
 The first time you open it, a setup screen walks you through signing in to YouTube Music, Spotify
 and Discord. After that it's just the music.
@@ -25,8 +25,8 @@ and Discord. After that it's just the music.
 
 | | |
 |---|---|
-| **Phone** | `JennyMusic-…-arm64.apk` from [Releases](https://github.com/barbykew/jenny-music/releases/latest). Open it and allow installing from that app. |
-| **PC** | `JennyMusic-…-Windows-Setup.exe`. If Windows says it *protected your PC*, click **More info → Run anyway**. |
+| **Phone** | `Avya-…-arm64.apk` from [Releases](https://github.com/barbykew/avya/releases/latest). Open it and allow installing from that app. |
+| **PC** | `Avya-…-Windows-Setup.exe`. If Windows says it *protected your PC*, click **More info → Run anyway**. |
 
 ## What it does
 
@@ -36,11 +36,8 @@ and Discord. After that it's just the music.
   place, and each one gets a tick when it's done.
 - **Spotify playlists, brought over.** Use the **Import** button in Library. If you've already
   copied a playlist link, it's filled in for you.
-- **The spider on Discord** shows what you're playing.
-- **A Jenny section** at the top of Settings holding the colour, Discord presence and Spotify
-  import options together.
-- Everything SimpMusic already does well: no ads, background play, synced lyrics, an equalizer,
-  crossfade and offline listening.
+- **Discord Rich Presence** shows what you're playing.
+- No ads, background play, synced lyrics, an equalizer, crossfade and offline listening.
 
 <details>
 <summary><b>How the Spotify import picks songs</b></summary>
@@ -75,7 +72,7 @@ For the Windows installer, build the app image and wrap it with [Inno Setup](htt
 
 ```bash
 ./gradlew :desktopApp:createDistributable
-ISCC.exe installer/jenny-music.iss
+ISCC.exe installer/avya.iss
 ```
 
 `core/` is a git submodule, so clone with `--recurse-submodules` or run
@@ -89,10 +86,11 @@ ISCC.exe installer/jenny-music.iss
 
 <sub>
 
-Built on top of [SimpMusic](https://github.com/maxrave-dev/SimpMusic) by
-[maxrave-dev](https://github.com/maxrave-dev). The playback, lyrics and nearly everything else
-that makes it a music player are their work, so go give them a star.
-Licensed GPL-3.0, like SimpMusic. See [LICENSE](LICENSE).
+Avya is a derivative of [SimpMusic](https://github.com/maxrave-dev/SimpMusic) by
+[maxrave-dev](https://github.com/maxrave-dev), and is licensed **GPL-3.0** like SimpMusic.
+The playback engine, lyrics and most of what makes it a music player are their work.
+Lyrics are supplied in part by the SimpMusic Lyrics community database.
+See [LICENSE](LICENSE).
 
 </sub>
 

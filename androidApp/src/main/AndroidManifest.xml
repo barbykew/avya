@@ -40,7 +40,7 @@
         </intent>
     </queries>
     <queries>
-        <package android:name="com.maxrave.simpmusic" />
+        <package android:name="com.avya.app" />
     </queries>
     <queries>
         <intent>
@@ -49,7 +49,7 @@
     </queries>
 
     <application
-        android:name=".SimpMusicApplication"
+        android:name=".AvyaApplication"
         android:allowBackup="true"
         android:appCategory="audio"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -58,7 +58,7 @@
         android:localeConfig="@xml/locale_config"
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SimpMusic"
+        android:theme="@style/Theme.Avya"
         android:enableOnBackInvokedCallback="true"
         android:requestLegacyExternalStorage="true"
         tools:replace="android:name"
@@ -71,7 +71,7 @@
             android:supportsPictureInPicture="true"
             android:enableOnBackInvokedCallback="true"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.SimpMusic"
+            android:theme="@style/Theme.Avya"
             tools:ignore="DiscouragedApi,LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -142,30 +142,23 @@
                 <data android:scheme="vnd.youtube.launch" />
             </intent-filter>
 
-            <!-- SimpMusic deep link filter (https) -->
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
+            <!-- No https App Links filter. `avya.app` is only the canonical form the deep-link
+                 handler normalises avya:// URIs into before parsing — it is not a domain we
+                 serve, so android:autoVerify could never succeed against it. The custom
+                 scheme below is the real entry point. -->
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="https" />
-                <data android:host="simpmusic.org" />
-                <data android:pathPrefix="/app/" />
-            </intent-filter>
-
-            <!-- SimpMusic deep link filter (custom scheme) -->
+            <!-- Avya deep link filter (custom scheme) -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="simpmusic" />
+                <data android:scheme="avya" />
             </intent-filter>
 
             <!-- Last.fm auth callback. The scheme is fixed by the callback URL registered on the
-                 Last.fm API account, so it is not "simpmusic". -->
+                 Last.fm API account, so it is not "avya". -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -264,7 +257,7 @@
             android:value="8" />
 
         <service
-            android:name="com.maxrave.media3.carapp.SimpMusicCarAppService"
+            android:name="com.maxrave.media3.carapp.AvyaCarAppService"
             android:exported="true"
             tools:ignore="ExportedService">
             <intent-filter>

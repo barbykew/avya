@@ -18,7 +18,7 @@ crowdin.yml
 # Kotlin 2.0
 .kotlin/
 .idea
-/simpmusic.jks
+/avya.jks
 /ffmpeg-kit/build/
 
 #dev files
@@ -47,5 +47,5 @@ sentry.properties
 # Conveyor output directory
 /output/
 
-# Jenny Music release signing key — never commit
-/jenny-music.jks
+# Avya release signing key — never commit
+/avya.jks

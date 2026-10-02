@@ -1,8 +1,14 @@
 diff --git a/service/kizzy/src/commonMain/kotlin/com/my/kizzy/DiscordRPC.kt b/service/kizzy/src/commonMain/kotlin/com/my/kizzy/DiscordRPC.kt
-index ee2b513..9370eff 100644
+index ee2b513..165e376 100644
 --- a/service/kizzy/src/commonMain/kotlin/com/my/kizzy/DiscordRPC.kt
 +++ b/service/kizzy/src/commonMain/kotlin/com/my/kizzy/DiscordRPC.kt
-@@ -34,8 +34,8 @@ class DiscordRPC(
+@@ -29,13 +29,13 @@ class DiscordRPC(
+             details = song.title,
+             state = song.artistName?.joinToString(", "),
+             largeImage = song.thumbnails?.let { RpcImage.ExternalImage(it) },
+-            smallImage = RpcImage.ExternalImage(APP_ICON),
++            smallImage = RpcImage.AppAsset(APP_ICON),
+             largeText = song.albumName,
              smallText = song.artistName?.firstOrNull(),
              buttons =
                  listOf(
@@ -19,11 +25,32 @@ index ee2b513..9370eff 100644
      companion object {
 -        private const val APPLICATION_ID = "1271273225120125040"
 -        private const val APP_NAME: String = "SimpMusic"
-+        private const val APPLICATION_ID = "REPLACE_WITH_YOUR_DISCORD_APPLICATION_ID"
-+        private const val APP_NAME: String = "Avya"
-         private const val APP_ICON: String =
+-        private const val APP_ICON: String =
 -            "https://fra.cloud.appwrite.io/v1/storage/buckets/683f1f620010ba0fa5b1/files/69007bc8001a28a7cea8/view?project=67ec0369002bd8a96885"
-+            "https://raw.githubusercontent.com/barbykew/avya/main/composeApp/icon/avya_app_icon.png"
++        private const val APPLICATION_ID = "1555687238300598432"
++        private const val APP_NAME: String = "Avya"
++        // Asset uploaded to the Discord application above, under this name.
++        private const val APP_ICON: String = "avya"
      }
  }
 \ No newline at end of file
+diff --git a/service/kizzy/src/commonMain/kotlin/com/my/kizzy/rpc/RpcImage.kt b/service/kizzy/src/commonMain/kotlin/com/my/kizzy/rpc/RpcImage.kt
+index 756b900..494b17b 100644
+--- a/service/kizzy/src/commonMain/kotlin/com/my/kizzy/rpc/RpcImage.kt
++++ b/service/kizzy/src/commonMain/kotlin/com/my/kizzy/rpc/RpcImage.kt
+@@ -18,6 +18,15 @@ package com.my.kizzy.rpc
+ sealed class RpcImage {
+     abstract suspend fun resolveImage(resolveExternalImage: suspend (String) -> String?): String?
+ 
++    /**
++     * An image uploaded to the Discord application itself, addressed by its asset name.
++     * Unlike [DiscordImage] this must NOT be given the `mp:` media-proxy prefix: that form is
++     * only for CDN attachment paths, and Discord will not resolve an application asset through it.
++     */
++    class AppAsset(val name: String) : RpcImage() {
++        override suspend fun resolveImage(resolveExternalImage: suspend (String) -> String?): String = name
++    }
++
+     class DiscordImage(val image: String) : RpcImage() {
+         override suspend fun resolveImage(resolveExternalImage: suspend (String) -> String?): String {
+             return if (image.startsWith("http")) image else "mp:${image}"

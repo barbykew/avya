@@ -4,7 +4,7 @@
 
 # Jenny Music
 
-*a music player made for one person*
+*a pastel music player for phone and PC*
 
 **[⬇ Download for phone & PC](https://github.com/barbykew/jenny-music/releases/latest)**
 
@@ -12,26 +12,14 @@
 
 ---
 
-### Jenny,
+## What it is
 
-you're always listening to something, so I made you somewhere to keep all of it.
+Jenny Music is a fork of [SimpMusic](https://github.com/maxrave-dev/SimpMusic) that streams from
+YouTube Music. It adds a pastel theme with ten colours to choose from, Discord Rich Presence, and
+an in-app Spotify playlist importer, and it runs on both Android and Windows.
 
-I painted it pastel because those are your colours. There are ten of them in Settings: rose,
-cotton candy, lavender, periwinkle, sky, mint, pistachio, butter, peach and clay. Pick one for
-whatever mood you're in and change it whenever you like.
-
-The spider is yours as well. When you play something, it shows up next to the song on Discord,
-so everyone can see what you're listening to.
-
-Your Spotify playlists can come too. Paste a link and it rebuilds them here, song by song. If it
-can't find the exact recording it leaves the song out instead of guessing, because it shouldn't
-hand you the wrong version of a song you love.
-
-The first time you open it, it'll walk you through the setup. After that it's just your music.
-
-I hope it plays you a lot of good songs. 💗
-
----
+The first time you open it, a setup screen walks you through signing in to YouTube Music, Spotify
+and Discord. After that it's just the music.
 
 ## Getting it
 
@@ -40,15 +28,17 @@ I hope it plays you a lot of good songs. 💗
 | **Phone** | `JennyMusic-…-arm64.apk` from [Releases](https://github.com/barbykew/jenny-music/releases/latest). Open it and allow installing from that app. |
 | **PC** | `JennyMusic-…-Windows-Setup.exe`. If Windows says it *protected your PC*, click **More info → Run anyway**. |
 
-## Little things it does
+## What it does
 
-- **Pastel everything.** Ten colours to choose from, and the whole app follows the one you pick.
+- **Pastel everything.** Ten colours — rose, cotton candy, lavender, periwinkle, sky, mint,
+  pistachio, butter, peach and clay — and the whole app follows the one you pick.
 - **A welcome on first open.** Signing in to YouTube Music, Spotify and Discord happens in one
   place, and each one gets a tick when it's done.
-- **Your Spotify playlists, brought over.** Use the **Import** button in Library. If you've already
+- **Spotify playlists, brought over.** Use the **Import** button in Library. If you've already
   copied a playlist link, it's filled in for you.
 - **The spider on Discord** shows what you're playing.
-- **A Jenny corner** at the top of Settings with just the things you'll actually use.
+- **A Jenny section** at the top of Settings holding the colour, Discord presence and Spotify
+  import options together.
 - Everything SimpMusic already does well: no ads, background play, synced lyrics, an equalizer,
   crossfade and offline listening.
 
@@ -99,7 +89,7 @@ ISCC.exe installer/jenny-music.iss
 
 <sub>
 
-Built with love on top of [SimpMusic](https://github.com/maxrave-dev/SimpMusic) by
+Built on top of [SimpMusic](https://github.com/maxrave-dev/SimpMusic) by
 [maxrave-dev](https://github.com/maxrave-dev). The playback, lyrics and nearly everything else
 that makes it a music player are their work, so go give them a star.
 Licensed GPL-3.0, like SimpMusic. See [LICENSE](LICENSE).

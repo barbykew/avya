@@ -288,9 +288,9 @@
     <string name="older_first">Older First</string>
     <string name="newer_first">Newer First</string>
     <string name="added_date">Added date</string>
-    <string name="credit_app">Jenny Music streams from YouTube Music — no ads, no tracking, background playback, synced lyrics and your own library.\n\nMade with ❤️ for Jenny.\n\nBuilt on SimpMusic by maxrave-dev, free and open source under the GPL-3.</string>
+    <string name="credit_app">Jenny Music streams from YouTube Music — no ads, no tracking, background playback, synced lyrics and your own library.\n\nBuilt on SimpMusic by maxrave-dev, free and open source under the GPL-3.</string>
     <string name="issue_tracker">Issue Tracker</string>
-    <string name="copyright" translatable="false">Made with ❤️ for Jenny · Built on SimpMusic (GPL-3) by Tuan Minh Nguyen Duc (maxrave-dev)</string>
+    <string name="copyright" translatable="false">Built on SimpMusic (GPL-3) by Tuan Minh Nguyen Duc (maxrave-dev)</string>
     <string name="featured_playlists">Featured Playlists</string>
     <string name="podcasts" translatable="false">Podcasts</string>
     <string name="featured_inArtist">Featured on</string>

@@ -75,8 +75,16 @@ For the Windows installer, build the app image and wrap it with [Inno Setup](htt
 ISCC.exe installer/avya.iss
 ```
 
-`core/` is a git submodule, so clone with `--recurse-submodules` or run
-`git submodule update --init` afterwards.
+`core/` is a git submodule pointing at [barbykew/avya-core](https://github.com/barbykew/avya-core)
+(branch `avya`), a fork of [maxrave-dev/core](https://github.com/maxrave-dev/core). Clone with
+`--recurse-submodules`, or run `git submodule update --init` afterwards.
+
+> **Known gap:** the pinned `core` does not yet define `SpotifyImportProgress`,
+> `SpotifyImportRepository` or `DataStoreManager.jennyWelcomeSeen`, which the Spotify import and
+> the welcome screen call, so `:androidApp:assembleDebug` currently fails with 45 unresolved
+> references across four files. Those additions were made locally against an earlier checkout and
+> never pushed; they need committing to `avya-core` before a release can be built. Everything
+> else in the project compiles.
 
 </details>
 

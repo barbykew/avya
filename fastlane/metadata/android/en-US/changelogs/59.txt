@@ -1,0 +1,6 @@
+Avya 3.0.0
+
+- Renamed to Avya, with a new icon throughout.
+- Discord Rich Presence now runs under Avya's own Discord application, instead of advertising another project.
+- Spotify playlist import works again: paste a playlist link and it is rebuilt here, matched by running time so a wrong recording is never substituted for the one you asked for.
+- New application id (com.avya.app). This installs alongside any previous version rather than updating it, and nothing carries over.

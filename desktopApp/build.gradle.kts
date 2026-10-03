@@ -150,13 +150,11 @@ tasks.named<hydraulic.conveyor.gradle.WriteConveyorConfigTask>("writeConveyorCon
 // image containing no libmpv, where every track failed with "Time out, check internet connection"
 // — which is exactly what shipped in 3.0.0. Wiring the dependency here makes that state
 // unreachable, rather than relying on whoever builds to remember a step the README also omitted.
-listOf(
-    "createDistributable",
-    "createReleaseDistributable",
-    "packageDistributionForCurrentOS",
-    "packageReleaseDistributionForCurrentOS",
-).forEach { taskName ->
-    tasks.matching { it.name == taskName }.configureEach { dependsOn(":composeApp:mpvSetupAll") }
+// The dependency belongs on prepareAppResources specifically: that is the task that actually
+// reads mpv-natives/, and everything that packages goes through it. Declaring it on
+// createDistributable alone left Gradle able to run the two in either order, which it rejects.
+tasks.matching { it.name == "prepareAppResources" }.configureEach {
+    dependsOn(":composeApp:mpvSetupAll")
 }
 
 compose.desktop {

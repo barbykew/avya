@@ -1,0 +1,5 @@
+Avya 3.0.1
+
+- Desktop Discord presence no longer needs a Discord login. It talks to the Discord app running on the same computer, the way games and editors do, and never touches your account token.
+- Android still uses the account-token method, because Discord offers no alternative on a phone. It now says so plainly before you sign in: Discord forbids it and accounts have been disabled for it.
+- Fixed: the Windows build shipped without its media backend, so nothing would play ("Time out, check internet connection").

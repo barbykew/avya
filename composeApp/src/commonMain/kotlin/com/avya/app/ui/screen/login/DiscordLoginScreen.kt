@@ -7,10 +7,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -39,6 +41,10 @@ import com.avya.app.viewModel.LogInViewModel
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import com.avya.app.resources.Res
+import com.avya.app.resources.cancel
+import com.avya.app.resources.discord_token_warning_body
+import com.avya.app.resources.discord_token_warning_continue
+import com.avya.app.resources.discord_token_warning_title
 import com.avya.app.resources.log_in_to_discord
 import com.avya.app.resources.login_success
 
@@ -64,6 +70,30 @@ fun DiscordLoginScreen(
         onDispose {
             showBottomNavigation()
         }
+    }
+
+    // Gated behind an explicit acknowledgement. This flow keeps the user's Discord account token
+    // and later connects to Discord as them, which Discord's terms forbid and its abuse detection
+    // reads as a stolen account — accounts have been disabled for it. That is not something to
+    // find out afterwards, so the webview does not load until this has been read.
+    var warningAcknowledged by rememberSaveable { mutableStateOf(false) }
+    if (!warningAcknowledged) {
+        AlertDialog(
+            onDismissRequest = { navController.navigateUp() },
+            title = { Text(text = stringResource(Res.string.discord_token_warning_title), style = typo().titleSmall) },
+            text = { Text(text = stringResource(Res.string.discord_token_warning_body), style = typo().bodyMedium) },
+            confirmButton = {
+                TextButton(onClick = { warningAcknowledged = true }) {
+                    Text(text = stringResource(Res.string.discord_token_warning_continue))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { navController.navigateUp() }) {
+                    Text(text = stringResource(Res.string.cancel))
+                }
+            },
+        )
+        return
     }
 
     val state = rememberWebViewState()

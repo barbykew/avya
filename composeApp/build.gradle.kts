@@ -694,7 +694,7 @@ val mpvSetupLinuxCi by tasks.registering {
 // ===========================================================================
 // Kept in a repo of its own rather than Avya's own releases: these archives are ~196 MB per
 // mpv bump and would otherwise sit in the release list users browse for the app itself.
-val mpvNativesRepo = "maxrave-dev/avya-files"
+val mpvNativesRepo = "maxrave-dev/simpmusic-files"
 val mpvNativesTag = "abc"
 val mpvSlices = listOf("linux-x64", "macos-arm64", "macos-x64", "windows-x64", "windows-arm64")
 

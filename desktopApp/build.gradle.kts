@@ -145,6 +145,20 @@ tasks.named<hydraulic.conveyor.gradle.WriteConveyorConfigTask>("writeConveyorCon
     }
 }
 
+// appResourcesRootDir below points at mpv-natives/, but nothing made the packaging tasks depend
+// on the task that fills it. An unstaged checkout therefore packaged happily and produced an app
+// image containing no libmpv, where every track failed with "Time out, check internet connection"
+// — which is exactly what shipped in 3.0.0. Wiring the dependency here makes that state
+// unreachable, rather than relying on whoever builds to remember a step the README also omitted.
+listOf(
+    "createDistributable",
+    "createReleaseDistributable",
+    "packageDistributionForCurrentOS",
+    "packageReleaseDistributionForCurrentOS",
+).forEach { taskName ->
+    tasks.matching { it.name == taskName }.configureEach { dependsOn(":composeApp:mpvSetupAll") }
+}
+
 compose.desktop {
     application {
         mainClass = "com.avya.app.MainKt"

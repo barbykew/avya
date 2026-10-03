@@ -75,6 +75,14 @@ For the Windows installer, build the app image and wrap it with [Inno Setup](htt
 ISCC.exe installer/avya.iss
 ```
 
+The app image needs libmpv, which `:composeApp:mpvSetupAll` downloads into `mpv-natives/`. The
+packaging tasks depend on it, so this happens on its own; run it directly only if you want the
+natives staged ahead of time:
+
+```bash
+./gradlew :composeApp:mpvSetupAll
+```
+
 `core/` is a git submodule pointing at [barbykew/avya-core](https://github.com/barbykew/avya-core)
 (branch `avya`), a fork of [maxrave-dev/core](https://github.com/maxrave-dev/core). Clone with
 `--recurse-submodules`, or run `git submodule update --init` afterwards.

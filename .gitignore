@@ -53,3 +53,7 @@ sentry.properties
 # Release signing material — never commit
 /avya-signing.properties
 /*.jks
+
+# JVM crash dumps from killed builds — 6 MB of noise, and they embed local paths
+hs_err_pid*.log
+replay_pid*.log
